@@ -8,6 +8,10 @@ const {
     deleteWorkout,
     updateWorkout
 } = require('../controllers/workoutController')
+const authGuard = require('../middleware/authGuard')
+
+// register auth guard for all workout routes
+router.use(authGuard)
 
 router.get('/', getWorkouts)
 
