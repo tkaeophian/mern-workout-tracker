@@ -1,3 +1,4 @@
+import { useAuthContext } from '../hooks/useAuthContext'
 import { useState } from 'react'
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
 
@@ -8,7 +9,7 @@ const WorkoutFrom = () => {
     const [reps, setReps] = useState(0)
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
-
+    const { user } = useAuthContext();
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -17,7 +18,8 @@ const WorkoutFrom = () => {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
             }
         })
 
