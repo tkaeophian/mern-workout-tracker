@@ -3,10 +3,13 @@ const express = require('express')
 const workoutRoutes = require('./routes/workouts')
 const userRoutes = require('./routes/user')
 const mongoose = require('mongoose')
+const compression = require('compression')
+const helmet = require('helmet')
 // create express app
 const app = express()
-
 app.use(express.json())
+app.use(compression())
+app.use(helmet())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
